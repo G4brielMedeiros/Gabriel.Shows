@@ -1,0 +1,16 @@
+C:\workspace\Gabriel.Shows\bin\Debug\net5.0\Gabriel.Shows.exe
+C:\workspace\Gabriel.Shows\bin\Debug\net5.0\Gabriel.Shows.deps.json
+C:\workspace\Gabriel.Shows\bin\Debug\net5.0\Gabriel.Shows.runtimeconfig.json
+C:\workspace\Gabriel.Shows\bin\Debug\net5.0\Gabriel.Shows.runtimeconfig.dev.json
+C:\workspace\Gabriel.Shows\bin\Debug\net5.0\Gabriel.Shows.dll
+C:\workspace\Gabriel.Shows\bin\Debug\net5.0\ref\Gabriel.Shows.dll
+C:\workspace\Gabriel.Shows\bin\Debug\net5.0\Gabriel.Shows.pdb
+C:\workspace\Gabriel.Shows\obj\Debug\net5.0\Gabriel.Shows.csprojAssemblyReference.cache
+C:\workspace\Gabriel.Shows\obj\Debug\net5.0\Gabriel.Shows.GeneratedMSBuildEditorConfig.editorconfig
+C:\workspace\Gabriel.Shows\obj\Debug\net5.0\Gabriel.Shows.AssemblyInfoInputs.cache
+C:\workspace\Gabriel.Shows\obj\Debug\net5.0\Gabriel.Shows.AssemblyInfo.cs
+C:\workspace\Gabriel.Shows\obj\Debug\net5.0\Gabriel.Shows.csproj.CoreCompileInputs.cache
+C:\workspace\Gabriel.Shows\obj\Debug\net5.0\Gabriel.Shows.dll
+C:\workspace\Gabriel.Shows\obj\Debug\net5.0\ref\Gabriel.Shows.dll
+C:\workspace\Gabriel.Shows\obj\Debug\net5.0\Gabriel.Shows.pdb
+C:\workspace\Gabriel.Shows\obj\Debug\net5.0\Gabriel.Shows.genruntimeconfig.cache
