@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace Project.Shows.Interfaces
+namespace Gabriel.Shows
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : Entity
     {
         List<T> List();
 

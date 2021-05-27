@@ -1,13 +1,14 @@
 ﻿using System;
 
-namespace Project.Shows
+namespace Gabriel.Shows
 {
     class Program
     {
-        static ShowsRepository repo = new ShowsRepository();
+        static ShowsRepository showsRepo = new ShowsRepository();
 
         static void Main(string[] args)
         {
+            WriteCommands();
             string UserInput = GetUserInput();
 
             while (true)
@@ -15,37 +16,41 @@ namespace Project.Shows
                 switch(UserInput)
                 {
 
-                    case "1":           //list
+                    case "list":             //list
                         DisplayShows();
                         break;
                     
-                    case "2":           //insert
+                    case "insert":           //insert
                         InsertShow("insert");
                         break;
                     
-                    case "3":           //update
+                    case "update":           //update
                         InsertShow("update");
                         break;
                     
-                    case "4":           //delete
+                    case "delete":           //delete
                         DeleteShow();
                         break;
                     
-                    case "5":           //details
+                    case "view":             //details
                         ViewShowDetails();
                         break;
                     
-                    case "C":           //clear
+                    case "clear":            //clear
                         Console.Clear();
+                        WriteCommands();
+                        break;
+
+                    case "help":
+                        WriteCommands();
                         break;
                     
-                    case "X":           //exit
+                    case "exit":             //exit
                         WriteLine("Goodbye!");
                         return;
                         
-
                     default:
-                        InvalidInput();
+                        InvalidInput("Invalid command. try 'help'");
                         break;
                 }
 
@@ -62,7 +67,7 @@ namespace Project.Shows
 
 
         //HELPER FUNCTION: Gets show details from user
-        private static void GetShowDetails(out int chosenGenre, out string chosenTitle, out int chosenYear, out string chosenDescription)
+        private static void GetShowDetails(out int chosenGenre, out string chosenTitle, out int chosenYear, out string chosenDescription, out int chosenEpisodes)
         {
             Console.Write("Enter a genre from the options above: ");
             chosenGenre = int.Parse(Console.ReadLine());
@@ -80,13 +85,16 @@ namespace Project.Shows
 
             Console.Write("Enter the description: ");
             chosenDescription = Console.ReadLine();
+
+            Console.Write("Enter episode count: ");
+            chosenEpisodes = int.Parse(Console.ReadLine());
         }
 
 
         //HELPER FUNCTION: Warns user of invalid input
-        private static void InvalidInput()
+        private static void InvalidInput(string msg)
         {
-            WriteLine("\n\nERROR: Invalid input. Operation failed.");
+            WriteLine("\n\nERROR: " + msg);
         }
 
 
@@ -102,27 +110,31 @@ namespace Project.Shows
 
 
 
+
         //MAIN FUNCTIONS:
 
 
-        //Displays interface and gets user input 
+        //Gets user input 
         private static string GetUserInput()
         {
-            WriteLine("");
-            WriteLine("Gabriel Shows at your service!!");
-            WriteLine("Select option:");
-            WriteLine("1- List series");
-            WriteLine("2- Insert new series");
-            WriteLine("3- Update existing series");
-            WriteLine("4- Delete series");
-            WriteLine("5- View series");
-            WriteLine("C- Clean console");
-            WriteLine("X= Exit");
-            WriteLine("");
-
-            string UserInput = Console.ReadLine().ToUpper();
+            string UserInput = Console.ReadLine().ToLower();
             WriteLine("");
             return UserInput;
+        }
+
+        private static void WriteCommands()
+        {
+            WriteLine("");
+            WriteLine("GABRIEL SHOWS");
+            WriteLine("COMMANDS:");
+            WriteLine("list");
+            WriteLine("insert");
+            WriteLine("update");
+            WriteLine("delete");
+            WriteLine("view");
+            WriteLine("clear");
+            WriteLine("exit");
+            WriteLine("");
         }
 
 
@@ -131,11 +143,11 @@ namespace Project.Shows
         {
             WriteLine("Listing shows...");
 
-            var showList = repo.List();
+            var showList = showsRepo.List();
 
             if(showList.Count == 0)
             {
-                WriteLine("No series found.");
+                WriteLine("No shows found.");
                 return;
             }
 
@@ -156,13 +168,13 @@ namespace Project.Shows
                 WriteLine("Enter the ID: ");
                 chosenId = int.Parse(Console.ReadLine());
             }
-            else chosenId = repo.NextId();
+            else chosenId = showsRepo.NextId();
      
             DisplayGenres();
 
             try
             {
-                GetShowDetails(out var chosenGenre, out var chosenTitle, out var chosenYear, out var chosenDescription);
+                GetShowDetails(out var chosenGenre, out var chosenTitle, out var chosenYear, out var chosenDescription, out var chosenEpisodes);
 
                 var show = new Show
                     (     
@@ -170,18 +182,21 @@ namespace Project.Shows
                         genre:          (Genre)chosenGenre,
                         title:          chosenTitle,
                         launchYear:           chosenYear,
-                        description:    chosenDescription
+                        description:    chosenDescription,
+                        episodes: chosenEpisodes
                     );
                 
                 if (operation == "update")
                 {
-                    repo.UpdateById(chosenId, show);
+                    showsRepo.UpdateById(chosenId, show);
                 }
-                else repo.Insert(show);
+                else showsRepo.Insert(show);
+
+                WriteLine("Show registered.");
             }
             catch (System.Exception)
             {      
-                InvalidInput();
+                InvalidInput("Invalid parameters rejected.");
             }          
         }
 
@@ -189,18 +204,17 @@ namespace Project.Shows
         //Asks user to delete a show
         private static void DeleteShow()
         {
-            WriteLine("Enter the ID of the series to be deleted: ");
-            repo.DeleteById(int.Parse(Console.ReadLine()));
+            WriteLine("Enter the ID of the show to be deleted: ");
+            showsRepo.DeleteById(int.Parse(Console.ReadLine()));
         }
 
 
         //Lists details of show based on user input id
         private static void ViewShowDetails()
         {
-            WriteLine("Enter series ID: ");
-            Console.WriteLine(    repo.ReadById( int.Parse(Console.ReadLine()) )    );
+            WriteLine("Enter show ID: ");
+            Console.WriteLine(    showsRepo.ReadById( int.Parse(Console.ReadLine()) )    );
         }
-
 
     } //END CLASS
 } //END NAMESPACE

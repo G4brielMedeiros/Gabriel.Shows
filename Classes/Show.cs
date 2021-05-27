@@ -1,41 +1,19 @@
 using System.Collections.Generic;
 
-namespace Project.Shows
+namespace Gabriel.Shows
 {
     public class Show : Entity
     {
-        public Genre genre { get; private set; }
+        public int episodes { get; private set; }
 
-        public string title { get; private set; }
-
-        public string description { get; private set; }
-
-        public int launchYear { get; private set; }
-
-        public bool deleted {get; private set;}
-
-        public Show( int id, Genre genre, string title, string description, int launchYear)
+        public Show( int id, Genre genre, string title, string description, int launchYear, int episodes) : base( id, genre, title, description, launchYear)
         {
-            this.id = id;
-            this.genre = genre;
-            this.title = title;
-            this.description = description;
-            this.launchYear = launchYear;
-            this.deleted = false;
-        }
-
-        public void Delete()
-        {
-            this.deleted = true;
+            this.episodes = episodes;
         }
 
         public override string ToString()
         {
-            return  "Genre: "       + this.genre        + "\n" +
-                    "Title: "       + this.title        + "\n" +
-                    "Description: " + this.description  + "\n" +
-                    "Launch year: " + this.launchYear   + "\n" +
-                    "Deleted: "     + this.deleted;
+            return  base.ToString() + "\n" + "Episodes: " + this.episodes;
         }
     }
 }

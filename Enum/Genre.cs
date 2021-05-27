@@ -1,4 +1,4 @@
-namespace Project.Shows
+namespace Gabriel.Shows
 {
     public enum Genre
     {

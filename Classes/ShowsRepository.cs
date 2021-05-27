@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Project.Shows.Interfaces;
 
-namespace Project.Shows
+namespace Gabriel.Shows
 {
     public class ShowsRepository : IRepository<Show>
     {
